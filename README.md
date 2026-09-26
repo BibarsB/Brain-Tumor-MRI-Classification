@@ -32,7 +32,7 @@ To run the interface, follow [Try the models — no retraining required](#try-th
 
 1. Download this repository using **Code → Download ZIP**, extract it, and keep the files in their existing folders.
 2. Install the dependencies using the command under [Run locally](#run-locally).
-3. Open [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb) in Jupyter or VS Code using the environment where you installed the dependencies. Use the **project folder containing `Models/`** as the working directory and run the cells in order.
+3. Open the project folder in VS Code or Jupyter, open [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb), select the Python environment where you installed the dependencies, and run all cells.
 4. Open the displayed Gradio URL, upload an MRI image, and choose **ResNet18**, **EfficientNet-B0**, or **Compare Both**.
 
 The notebooks and supporting folders are arranged as follows:
