@@ -22,6 +22,30 @@ A PyTorch project comparing **ResNet18** and **EfficientNet-B0** for four-class 
 
 **The interface launched in ~20 seconds after setup.** Loads saved weights without retraining and runs on CPU or CUDA. Launch time varies by machine.
 
+## Interactive Gradio Interface
+
+Run either model individually or compare both on the same image. The interface displays the **predicted class, confidence, all four class probabilities, and Grad-CAM overlays**, plus model agreement or disagreement in comparison mode.
+
+**Confidence is the model's score for one uploaded image; test accuracy measures performance across the test set.** A high-confidence prediction can still be wrong.
+
+![Gradio model comparison showing predictions, class probabilities, and Grad-CAM for both models](gradio_model_comparison.png)
+
+### Flagged cases for review
+
+**Analyze image → enter image ID → flag for review → save locally**
+
+The image ID is used only for review metadata and is **not passed to either model**. Recognized filename codes, such as `gl` in `Te-gl_59`, provide an inferred class label; unrecognized IDs return `Unknown`. This is filename-derived metadata, not independently verified ground truth.
+
+Each case is saved under `flagged_cases/<image_id>__<timestamp>/` with:
+
+- `original_mri.png`
+- `resnet_gradcam.png` and/or `efficientnet_gradcam.png`, depending on the selected mode
+- `case_info.txt`: image ID, inferred label, timestamp, mode, predictions, confidence, and available comparison text
+
+**Flagging does not retrain or update the models.** Future training use requires verified labels and a separate evaluation set, particularly when flagged images came from the test set.
+
+![Gradio interface showing image ID entry, inferred class, and flagged-case save confirmation](gradio_flagged_case_review.png)
+
 ![Brain Tumor MRI Classification project map](BT_MRI_Class_Project_Map.png)
 
 ## Explore the project
@@ -102,30 +126,6 @@ Glioma accounts for most errors. EfficientNet-B0 correctly classified **323/400*
 ![Original glioma MRI and Grad-CAM for an incorrect meningioma prediction](gradcam_misclassified_prediction.png)
 
 Heatmaps highlight regions influencing the predicted class; they do not mark exact tumor boundaries or establish that the prediction is medically correct.
-
-## Interactive Gradio Interface
-
-Run either model individually or compare both on the same image. The interface displays the **predicted class, confidence, all four class probabilities, and Grad-CAM overlays**, plus model agreement or disagreement in comparison mode.
-
-**Confidence is the model's score for one uploaded image; test accuracy measures performance across the test set.** A high-confidence prediction can still be wrong.
-
-![Gradio model comparison showing predictions, class probabilities, and Grad-CAM for both models](gradio_model_comparison.png)
-
-### Flagged cases for review
-
-**Analyze image → enter image ID → flag for review → save locally**
-
-The image ID is used only for review metadata and is **not passed to either model**. Recognized filename codes, such as `gl` in `Te-gl_59`, provide an inferred class label; unrecognized IDs return `Unknown`. This is filename-derived metadata, not independently verified ground truth.
-
-Each case is saved under `flagged_cases/<image_id>__<timestamp>/` with:
-
-- `original_mri.png`
-- `resnet_gradcam.png` and/or `efficientnet_gradcam.png`, depending on the selected mode
-- `case_info.txt`: image ID, inferred label, timestamp, mode, predictions, confidence, and available comparison text
-
-**Flagging does not retrain or update the models.** Future training use requires verified labels and a separate evaluation set, particularly when flagged images came from the test set.
-
-![Gradio interface showing image ID entry, inferred class, and flagged-case save confirmation](gradio_flagged_case_review.png)
 
 ## Limitations
 
