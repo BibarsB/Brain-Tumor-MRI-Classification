@@ -14,13 +14,13 @@ To run the interface, follow [Try the models — no retraining required](#try-th
 
 ## Explore the project
 
-| File | Purpose |
+| File / folder | Purpose |
 | --- | --- |
 | [Brain_Tumor_MRI_Classification.ipynb](Brain_Tumor_MRI_Classification.ipynb) | Exploration, preprocessing, training, evaluation, model comparison, and Grad-CAM |
 | [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb) | Standalone interactive interface and flagged-case workflow |
-| [best_resnet18.pth](best_resnet18.pth) / [best_efficientnet_b0.pth](best_efficientnet_b0.pth) | Saved model weights selected by validation loss |
+| [Models/best_resnet18.pth](Models/best_resnet18.pth) / [Models/best_efficientnet_b0.pth](Models/best_efficientnet_b0.pth) | Saved model weights selected by validation loss |
 | [Brain_Tumor_MRI_Classification_Report.docx](Brain_Tumor_MRI_Classification_Report.docx) | Academic methodology, interpretation, limitations, ethics, and related research |
-| [BT_MRI_Class_Project_Map.png](Images/BT_MRI_Class_Project_Map.png) | Visual workflow overview |
+| [Images/](Images/) | Project map, confusion matrices, Grad-CAM examples, and interface screenshots |
 | [requirements.txt](requirements.txt) | Python dependencies |
 | [.gitignore](.gitignore) | Repository exclusion rules |
 
@@ -28,17 +28,31 @@ To run the interface, follow [Try the models — no retraining required](#try-th
 
 ## Try the models — no retraining required
 
-> **Download the interface notebook + both saved weights, run the cells, and upload an MRI image.** You do not need the training notebook or the full dataset.
+> **The trained weights are included in `Models/`. Install the dependencies and run the interface notebook to try the models—no retraining or full dataset needed.**
 
-1. Download these three files into the same folder:
-   - [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb)
-   - [best_resnet18.pth](best_resnet18.pth)
-   - [best_efficientnet_b0.pth](best_efficientnet_b0.pth)
-2. For first-time setup, also download [requirements.txt](requirements.txt) and install the dependencies using the command under [Run locally](#run-locally).
-3. Open the notebook in Jupyter or VS Code, use that folder as the working directory, and run the cells in order.
+1. Download this repository using **Code → Download ZIP**, extract it, and keep the files in their existing folders.
+2. Install the dependencies using the command under [Run locally](#run-locally).
+3. Open [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb) in Jupyter or VS Code using the environment where you installed the dependencies. Use the **project folder containing `Models/`** as the working directory and run the cells in order.
 4. Open the displayed Gradio URL, upload an MRI image, and choose **ResNet18**, **EfficientNet-B0**, or **Compare Both**.
 
-**The interface launched in ~20 seconds after setup.** Loads saved weights without retraining and runs on CPU or CUDA. Launch time varies by machine.
+The notebooks and supporting folders are arranged as follows:
+
+```text
+BioInformatics/
+├── Brain_Tumor_MRI_Classification.ipynb
+├── Brain_Tumor_Gradio_Demo.ipynb
+├── requirements.txt
+├── Images/                         # README visuals
+└── Models/
+    ├── best_resnet18.pth
+    └── best_efficientnet_b0.pth
+```
+
+The interface already loads both weights from `Models/`; no code changes are needed with this layout. Keep the folder names exactly as shown: `Models/` for weights and `Images/` for README visuals.
+
+**The interface launched in ~20 seconds in the recorded example, after setup.** It loads saved weights without retraining and runs on CPU or CUDA. Launch time varies by machine.
+
+**GPU recommended for speed:** Both notebooks automatically use a CUDA GPU when PyTorch detects one; otherwise, they use CPU. Check the startup output: `Using device: cuda` confirms GPU use. If you have a compatible NVIDIA GPU but see `cpu`, check that your notebook is using a Python environment with CUDA-enabled PyTorch and a working NVIDIA driver.
 
 **Interactive Gradio Interface**
 
@@ -78,7 +92,7 @@ During fine-tuning, the checkpoint with the **lowest validation loss** is saved 
 | ResNet18 | 0.0465 | 11 | 0.4325 | 93.56% |
 | EfficientNet-B0 | 0.0184 | 15 | 0.3529 | **95.00%** |
 
-¹ Epochs count both training stages.
+¹ Counted from the start of training: epoch 11 is the 6th fine-tuning epoch; epoch 15 is the 10th, after 5 frozen-backbone epochs.
 
 The notebook includes learning curves, class-level precision/recall/F1, confusion matrices, and Grad-CAM examples for correct and incorrect predictions.
 
@@ -123,7 +137,7 @@ Run either model individually or compare both on the same image. The interface d
 
 The image ID is used only for review metadata and is **not passed to either model**. Recognized filename codes, such as `gl` in `Te-gl_59`, provide an inferred class label; unrecognized IDs return `Unknown`. This is filename-derived metadata, not independently verified ground truth.
 
-Each case is saved under `flagged_cases/<image_id>__<timestamp>/` with:
+The interface creates `flagged_cases/` in the working directory. Each case is saved under `flagged_cases/<image_id>__<timestamp>/` with:
 
 - `original_mri.png`
 - `resnet_gradcam.png` and/or `efficientnet_gradcam.png`, depending on the selected mode
@@ -152,7 +166,11 @@ Install dependencies in the Python environment used by your notebook:
 python -m pip install -r requirements.txt
 ```
 
-For the interface, follow the quick-start steps above. To rerun training and evaluation, prepare this dataset layout and open the main notebook from the repository root:
+For the interface, follow [Try the models — no retraining required](#try-the-models--no-retraining-required). The dataset is only needed for the training and evaluation workflow below.
+
+### Optional: rerun training and evaluation
+
+Prepare this dataset layout and open `Brain_Tumor_MRI_Classification.ipynb` from the repository root:
 
 ```text
 Brain Tumor MRI Dataset/
@@ -168,7 +186,9 @@ Brain Tumor MRI Dataset/
     └── pituitary/
 ```
 
-Run the main notebook sequentially. Its device-information cell currently calls CUDA directly, so CPU-only training requires adjusting that cell; the separate interface already supports CPU. Training downloads pretrained weights if needed and overwrites the checkpoint files when validation loss improves.
+Run the main notebook sequentially from the project root. A CUDA GPU is recommended for faster training; CPU is supported but training will take longer. Training downloads pretrained weights if needed. The original recorded training run used an NVIDIA GeForce RTX 4050 Laptop GPU.
+
+**Training checkpoints:** The main notebook saves and loads the best checkpoints in `Models/`, which is also where the interface loads its weights. Retraining can overwrite the supplied weights; restart the interface afterward to load the new checkpoints. The reported results above describe the original recorded run.
 
 **Reproducibility:** The split uses `random_state=42`, but training is not fully seeded and dependency versions are not pinned. Training randomness, hardware, and library versions can change rerun results.
 
