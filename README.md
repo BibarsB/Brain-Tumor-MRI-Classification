@@ -10,7 +10,7 @@ To run the interface, follow [Try the models — no retraining required](#try-th
 
 > Educational and research project. Not intended for medical diagnosis or clinical decision-making.
 
-![Brain Tumor MRI Classification project map](BT_MRI_Class_Project_Map.png)
+![Brain Tumor MRI Classification project map](Images/BT_MRI_Class_Project_Map.png)
 
 ## Explore the project
 
@@ -20,7 +20,7 @@ To run the interface, follow [Try the models — no retraining required](#try-th
 | [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb) | Standalone interactive interface and flagged-case workflow |
 | [best_resnet18.pth](best_resnet18.pth) / [best_efficientnet_b0.pth](best_efficientnet_b0.pth) | Saved model weights selected by validation loss |
 | [Brain_Tumor_MRI_Classification_Report.docx](Brain_Tumor_MRI_Classification_Report.docx) | Academic methodology, interpretation, limitations, ethics, and related research |
-| [BT_MRI_Class_Project_Map.png](BT_MRI_Class_Project_Map.png) | Visual workflow overview |
+| [BT_MRI_Class_Project_Map.png](Images/BT_MRI_Class_Project_Map.png) | Visual workflow overview |
 | [requirements.txt](requirements.txt) | Python dependencies |
 | [.gitignore](.gitignore) | Repository exclusion rules |
 
@@ -44,7 +44,7 @@ To run the interface, follow [Try the models — no retraining required](#try-th
 
 Compare both models, view predictions and Grad-CAM heatmaps, and flag cases for later review.
 
-![Gradio model comparison showing predictions, class probabilities, and Grad-CAM for both models](gradio_model_comparison.png)
+![Gradio model comparison showing predictions, class probabilities, and Grad-CAM for both models](Images/gradio_model_comparison.png)
 
 ## Dataset and preprocessing
 
@@ -95,7 +95,7 @@ Rows show the true class; columns show the predicted class. Each row contains 40
 
 | ResNet18 | EfficientNet-B0 |
 | --- | --- |
-| ![ResNet18 test confusion matrix](resnet18_confusion_matrix.png) | ![EfficientNet-B0 test confusion matrix](efficientnet_b0_confusion_matrix.png) |
+| ![ResNet18 test confusion matrix](Images/resnet18_confusion_matrix.png) | ![EfficientNet-B0 test confusion matrix](Images/efficientnet_b0_confusion_matrix.png) |
 
 Glioma accounts for most errors. EfficientNet-B0 correctly classified **323/400** glioma images, compared with **306/400** for ResNet18.
 
@@ -103,11 +103,11 @@ Glioma accounts for most errors. EfficientNet-B0 correctly classified **323/400*
 
 **Correct prediction:** a glioma image classified as glioma.
 
-![Original glioma MRI and Grad-CAM for a correct glioma prediction](gradcam_correct_prediction.png)
+![Original glioma MRI and Grad-CAM for a correct glioma prediction](Images/gradcam_correct_prediction.png)
 
 **Misclassified prediction:** a glioma image classified as meningioma.
 
-![Original glioma MRI and Grad-CAM for an incorrect meningioma prediction](gradcam_misclassified_prediction.png)
+![Original glioma MRI and Grad-CAM for an incorrect meningioma prediction](Images/gradcam_misclassified_prediction.png)
 
 Heatmaps highlight regions influencing the predicted class; they do not mark exact tumor boundaries or establish that the prediction is medically correct.
 
@@ -131,7 +131,7 @@ Each case is saved under `flagged_cases/<image_id>__<timestamp>/` with:
 
 **Flagging does not retrain or update the models.** Future training use requires verified labels and a separate evaluation set, particularly when flagged images came from the test set.
 
-![Gradio interface showing image ID entry, inferred class, and flagged-case save confirmation](gradio_flagged_case_review.png)
+![Gradio interface showing image ID entry, inferred class, and flagged-case save confirmation](Images/gradio_flagged_case_review.png)
 
 ## Limitations
 
