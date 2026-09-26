@@ -1,0 +1,40 @@
+Flagged MRI Case
+================
+
+Image ID
+--------
+Te-gl_59
+
+True Class
+----------
+Glioma
+
+Flagged At
+----------
+2026-09-20_15-08-12
+
+View Mode
+---------
+Compare Both
+
+
+ResNet18
+--------
+Prediction: No Tumor
+Confidence: 99.32%
+
+
+EfficientNet-B0
+---------------
+Prediction: No Tumor
+Confidence: 46.92%
+
+
+Model Comparison
+----------------
+Models agree.
+
+Prediction: No Tumor
+
+ResNet18 confidence: 99.32%
+EfficientNet-B0 confidence: 46.92%

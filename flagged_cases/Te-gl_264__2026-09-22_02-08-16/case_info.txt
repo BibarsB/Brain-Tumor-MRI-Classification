@@ -1,0 +1,40 @@
+Flagged MRI Case
+================
+
+Image ID
+--------
+Te-gl_264
+
+True Class
+----------
+Glioma
+
+Flagged At
+----------
+2026-09-22_02-08-16
+
+View Mode
+---------
+Compare Both
+
+
+ResNet18
+--------
+Prediction: Meningioma
+Confidence: 99.55%
+
+
+EfficientNet-B0
+---------------
+Prediction: Meningioma
+Confidence: 97.16%
+
+
+Model Comparison
+----------------
+Models agree.
+
+Prediction: Meningioma
+
+ResNet18 confidence: 99.55%
+EfficientNet-B0 confidence: 97.16%
