@@ -1,12 +1,30 @@
 # Brain Tumor MRI Classification
 
-A PyTorch project comparing **ResNet18** and **EfficientNet-B0** for four-class brain MRI classification: **glioma, meningioma, no tumor, and pituitary**. It combines transfer learning, model evaluation, Grad-CAM explainability, and an **Interactive Gradio Interface** for exploring predictions and saving difficult cases for review.
+A deep learning project using PyTorch to compare **ResNet18** and **EfficientNet-B0** for four-class brain MRI classification: **glioma, meningioma, no tumor, and pituitary**. It combines transfer learning, model evaluation, Grad-CAM explainability, and an **Interactive Gradio Interface** for exploring predictions and saving difficult cases for review.
+
+To run the interface, follow [Try the models — no retraining required](#try-the-models--no-retraining-required) below.
 
 **Pipeline:** MRI images → preprocessing → transfer learning → fine-tuning → evaluation → Grad-CAM → interactive Gradio interface
 
 **Recorded test accuracy:** ResNet18 **93.56%** · EfficientNet-B0 **95.00%**
 
 > Educational and research project. Not intended for medical diagnosis or clinical decision-making.
+
+![Brain Tumor MRI Classification project map](BT_MRI_Class_Project_Map.png)
+
+## Explore the project
+
+| File | Purpose |
+| --- | --- |
+| [Brain_Tumor_MRI_Classification.ipynb](Brain_Tumor_MRI_Classification.ipynb) | Exploration, preprocessing, training, evaluation, model comparison, and Grad-CAM |
+| [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb) | Standalone interactive interface and flagged-case workflow |
+| [best_resnet18.pth](best_resnet18.pth) / [best_efficientnet_b0.pth](best_efficientnet_b0.pth) | Saved model weights selected by validation loss |
+| [Brain_Tumor_MRI_Classification_Report.docx](Brain_Tumor_MRI_Classification_Report.docx) | Academic methodology, interpretation, limitations, ethics, and related research |
+| [BT_MRI_Class_Project_Map.png](BT_MRI_Class_Project_Map.png) | Visual workflow overview |
+| [requirements.txt](requirements.txt) | Python dependencies |
+| [.gitignore](.gitignore) | Repository exclusion rules |
+
+**The main notebook explains the reasoning alongside the implementation.** Markdown explanations and justifications follow relevant code cells, connecting each step to its purpose, results, and limitations.
 
 ## Try the models — no retraining required
 
@@ -27,22 +45,6 @@ A PyTorch project comparing **ResNet18** and **EfficientNet-B0** for four-class 
 Compare both models, view predictions and Grad-CAM heatmaps, and flag cases for later review.
 
 ![Gradio model comparison showing predictions, class probabilities, and Grad-CAM for both models](gradio_model_comparison.png)
-
-![Brain Tumor MRI Classification project map](BT_MRI_Class_Project_Map.png)
-
-## Explore the project
-
-| File | Purpose |
-| --- | --- |
-| [Brain_Tumor_MRI_Classification.ipynb](Brain_Tumor_MRI_Classification.ipynb) | Exploration, preprocessing, training, evaluation, model comparison, and Grad-CAM |
-| [Brain_Tumor_Gradio_Demo.ipynb](Brain_Tumor_Gradio_Demo.ipynb) | Standalone interactive interface and flagged-case workflow |
-| [best_resnet18.pth](best_resnet18.pth) / [best_efficientnet_b0.pth](best_efficientnet_b0.pth) | Saved model weights selected by validation loss |
-| [Brain_Tumor_MRI_Classification_Report.docx](Brain_Tumor_MRI_Classification_Report.docx) | Academic methodology, interpretation, limitations, ethics, and related research |
-| [BT_MRI_Class_Project_Map.png](BT_MRI_Class_Project_Map.png) | Visual workflow overview |
-| [requirements.txt](requirements.txt) | Python dependencies |
-| [.gitignore](.gitignore) | Repository exclusion rules |
-
-**The main notebook explains the reasoning alongside the implementation.** Markdown explanations and justifications follow relevant code cells, connecting each step to its purpose, results, and limitations.
 
 ## Dataset and preprocessing
 
